@@ -391,11 +391,14 @@ defmodule Phoenix.LiveView.Components.MultiSelect do
   end
 
   defp set_selected2(socket, options, count, sel_count) do
+    checked_options = filter_checked_options(options)
+
     socket =
       socket
       |> assign(:options,        options)
       |> assign(:option_count,   count)
       |> assign(:selected_count, sel_count)
+      |> assign(:checked_options,   checked_options)
 
     # Notify LiveView of the changes
     chg = socket.assigns.on_change
