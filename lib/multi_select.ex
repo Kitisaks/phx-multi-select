@@ -271,7 +271,7 @@ defmodule Phoenix.LiveView.Components.MultiSelect do
                 <span><%= @selected_count %> <%= @selected_items_label %></span>
                 <.svg
                   type={:close}
-                  size="4"
+                  size="size-4"
                   color=""
                   on_click="checked"
                   params={[{"uncheck", "all"}, {"id", @id}]}
@@ -284,7 +284,7 @@ defmodule Phoenix.LiveView.Components.MultiSelect do
                   <span><%= option.label %></span>
                   <.svg
                     type={:close}
-                    size="4"
+                    size="size-4"
                     color=""
                     on_click="checked"
                     params={[{"uncheck", option.id}, {"id", @id}]}
@@ -303,7 +303,7 @@ defmodule Phoenix.LiveView.Components.MultiSelect do
             params={[{"uncheck", "all"}, {"id", @id}]}
             target={@myself}
           />
-          <.svg id={@id <> "-updown-icon"} type={:updown} size="6" {@updown_rest} />
+          <.svg id={@id <> "-updown-icon"} type={:updown} size="size-6" {@updown_rest} />
         </div>
       </div>
       <div id={"#{@id}-dropdown"} tabindex="0" class={css(@id, :body, true)} {@ddown_events}>
@@ -508,7 +508,7 @@ defmodule Phoenix.LiveView.Components.MultiSelect do
 
   attr :id, :string, default: nil
   attr :type, :atom, values: [:close, :clear, :check, :updown]
-  attr :size, :string, default: "5"
+  attr :size, :string, default: "size-5"
   attr :color, :string, default: @css.icon_color
   attr :on_click, :any, default: nil
   attr :params, :list, default: []
@@ -547,7 +547,7 @@ defmodule Phoenix.LiveView.Components.MultiSelect do
       |> assign(:rest, rest)
       |> assign(
         :svg_class,
-        build_class(["w-#{size} h-#{size} cursor-pointer", c1, assigns[:class]])
+        build_class(["#{size} cursor-pointer", c1, assigns[:class]])
       )
       |> assign(
         :path,
