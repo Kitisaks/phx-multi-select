@@ -3,12 +3,13 @@ defmodule MultiSelectExampleWeb.Layouts do
 
   embed_templates "layouts/*"
 
-  @use_alpinejs   Application.compile_env(:phoenix_multi_select, :use_alpinejs) || false
+  @use_alpinejs Application.compile_env(:phoenix_multi_select, :use_alpinejs) || false
 
   def script_alpinejs(assigns) do
     if @use_alpinejs do
       ~H"""
-      <script src="//unpkg.com/alpinejs" defer></script>
+      <script src="//unpkg.com/alpinejs" defer>
+      </script>
       """
     else
       ~H""

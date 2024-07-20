@@ -445,11 +445,12 @@ defmodule Phoenix.LiveView.Components.MultiSelect do
   end
 
   defp set_selected(%{assigns: assigns} = socket, idx, selected?) do
+    index = String.to_integer(idx)
     sel_inc = (selected? && 1) || 0
 
     {count, sel_count, options} =
       Enum.reduce(assigns.options, {0, 0, []}, fn opt, {n, s, acc} ->
-        if opt.id == idx do
+        if opt.id == index do
           {n + 1, s + sel_inc, [%{opt | selected: selected?} | acc]}
         else
           {n + 1, s + ((opt.selected && 1) || 0), [opt | acc]}
@@ -460,14 +461,11 @@ defmodule Phoenix.LiveView.Components.MultiSelect do
   end
 
   defp set_selected2(socket, options, count, sel_count) do
-    checked_options = filter_checked_options(options)
-
     socket =
       socket
       |> assign(:options, options)
       |> assign(:option_count, count)
       |> assign(:selected_count, sel_count)
-      |> assign(:checked_options, checked_options)
 
     # Notify LiveView of the changes
     chg = socket.assigns.on_change

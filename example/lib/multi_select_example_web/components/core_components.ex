@@ -9,10 +9,10 @@ defmodule MultiSelectExampleWeb.CoreComponents do
   Icons are provided by [heroicons](https://heroicons.com), using the
   [heroicons_elixir](https://github.com/mveytsman/heroicons_elixir) project.
   """
-  use    Phoenix.Component
+  use Phoenix.Component
 
   import MultiSelectExampleWeb.Gettext
-  alias  Phoenix.LiveView.JS
+  alias Phoenix.LiveView.JS
 
   @doc """
   Renders flash notices.
@@ -73,12 +73,27 @@ defmodule MultiSelectExampleWeb.CoreComponents do
       <.button>Send!</.button>
       <.button phx-click="go" class="ml-2">Send!</.button>
   """
-  attr :class,   :string,  default: nil
-  attr :label,   :string,  default: nil
-  attr :color,   :string,  default: nil, values: ["primary", "secondary", "accent", "ghost", "info", "success", "warning", "error", nil], default: "primary"
+  attr :class, :string, default: nil
+  attr :label, :string, default: nil
+
+  attr :color, :string,
+    default: nil,
+    values: [
+      "primary",
+      "secondary",
+      "accent",
+      "ghost",
+      "info",
+      "success",
+      "warning",
+      "error",
+      nil
+    ],
+    default: "primary"
+
   attr :loading, :boolean, default: false
-  attr :to,      :string
-  attr :rest,    :global,  include: ~w(disabled form name value type)
+  attr :to, :string
+  attr :rest, :global, include: ~w(disabled form name value type)
 
   slot :inner_block, required: false
 
@@ -92,7 +107,7 @@ defmodule MultiSelectExampleWeb.CoreComponents do
       ]}
       {@rest}
     >
-      <%= @inner_block && render_slot(@inner_block) || @label %>
+      <%= (@inner_block && render_slot(@inner_block)) || @label %>
     </button>
     """
   end
@@ -104,8 +119,8 @@ defmodule MultiSelectExampleWeb.CoreComponents do
       to: selector,
       transition:
         {"transition-all transform ease-out duration-300",
-          "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95",
-          "opacity-100 translate-y-0 sm:scale-100"}
+         "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95",
+         "opacity-100 translate-y-0 sm:scale-100"}
     )
   end
 
@@ -115,8 +130,8 @@ defmodule MultiSelectExampleWeb.CoreComponents do
       time: 200,
       transition:
         {"transition-all transform ease-in duration-200",
-          "opacity-100 translate-y-0 sm:scale-100",
-          "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"}
+         "opacity-100 translate-y-0 sm:scale-100",
+         "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"}
     )
   end
 end

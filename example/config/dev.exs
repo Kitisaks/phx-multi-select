@@ -9,13 +9,13 @@ import Config
 config :multi_select_example, MultiSelectExampleWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: System.get_env("PORT", "4000") |> String.to_integer],
+  http: [ip: {127, 0, 0, 1}, port: System.get_env("PORT", "4000") |> String.to_integer()],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "VNdcFh87X4RaUQfnQzvHQ/Yd84gI+RQbqkUILK+hmcIfIvC8V4sGnhKBcaEJM7CN",
   watchers: [
-    esbuild:  {Esbuild,  :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
@@ -50,7 +50,7 @@ config :multi_select_example, MultiSelectExampleWeb.Endpoint,
       ~r"priv/gettext/.*(po)$",
       ~r"lib/multi_select_example_web/(live|views)/.*(ex)$",
       ~r"lib/multi_select_example_web/templates/.*(eex)$",
-      ~r"\.\./lib/.*\.(ex)$",
+      ~r"\.\./lib/.*\.(ex)$"
     ]
   ]
 

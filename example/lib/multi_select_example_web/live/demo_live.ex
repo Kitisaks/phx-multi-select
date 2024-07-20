@@ -10,10 +10,11 @@ defmodule MultiSelectExampleWeb.DemoLive do
   @impl true
   def mount(_params, _session, socket) do
     options = for t <- SampleData.list_topics(), do: Option.new(t)
-    socket  =
+
+    socket =
       socket
-      |> assign_new(:id,           fn -> "multi-select-example" end)
-      |> assign_new(:wrap,         fn -> false end)
+      |> assign_new(:id, fn -> "multi-select-example" end)
+      |> assign_new(:wrap, fn -> false end)
       |> assign_new(:max_selected, fn -> SampleData.topics_count() end)
       |> update_assigns(options)
 
@@ -32,6 +33,7 @@ defmodule MultiSelectExampleWeb.DemoLive do
     case params[@id] do
       nil ->
         {:noreply, socket}
+
       map ->
         params = Map.keys(map) |> Enum.join(",")
         {:noreply, push_redirect(socket, to: ~p"/result?values=#{params}")}
@@ -52,13 +54,14 @@ defmodule MultiSelectExampleWeb.DemoLive do
 
   defp update_assigns(socket, options) do
     selected = for opt <- options, opt.selected, do: opt.id
-    quotes   =
+
+    quotes =
       if selected == [],
-        do:   SampleData.sample_data(),
+        do: SampleData.sample_data(),
         else: SampleData.sample_data_by_topic(selected)
+
     socket
     |> assign(:quotes, quotes)
     |> assign(:topics, options)
   end
-
 end
